@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './components/home';
 import AboutScreen from './components/about';
+import LoginScreen from './components/login';
+import FeedScreen from './components/feed';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,15 +14,12 @@ class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <View style={styles.container}>
-          <Stack.Navigator initialRouteName='
-          Home'>
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="About" component={AboutScreen} />
-          </Stack.Navigator>
-          <Text>start working on your app!</Text>
-          <StatusBar style="auto" />
-        </View>
+        <Stack.Navigator initialRouteName="Login" component={LoginScreen}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Feed" component={FeedScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="About" component={AboutScreen} />
+        </Stack.Navigator>
       </NavigationContainer>
     );
   }
