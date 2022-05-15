@@ -12,23 +12,27 @@ const storeData = async (value) => {
     }
 }
 
-class LoginScreen extends Component {
+class SignUpScreen extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            firstname: "",
+            lastname: "",
             email: "",
             password: "hello123"
         };
     }
 
-    login = () => {
-        fetch('http://192.168.1.63:3333/api/1.0.0/login', {
+    signup = () => {
+        fetch('http://192.168.1.63:3333/api/1.0.0/user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                firstname: this.state.firstname,
+                lastname: this.state.lastname,
                 email: this.state.email,
                 password: this.state.password
             })
@@ -37,7 +41,7 @@ class LoginScreen extends Component {
             .then((json) => {
                 console.log(json);
                 storeData(json);
-                this.props.navigation.navigate("Feed");
+                this.props.navigation.navigate("Login");
             })
             .catch((error) => {
                 console.error(error);
@@ -50,7 +54,16 @@ class LoginScreen extends Component {
     render() {
         return (
             <View>
-                <Text>Login</Text>
+                <Text>Sign Up</Text>
+                <TextInput
+                    placeholder="First Name"
+                    onChangeText={(firstname) => this.setState({ firstname })}
+                    value={this.state.firstname}
+                /><TextInput
+                    placeholder="Last Name"
+                    onChangeText={(lastname) => this.setState({ lastname })}
+                    value={this.state.lastname}
+                />
                 <TextInput
                     placeholder="Enter email"
                     onChangeText={(email) => this.setState({ email })}
@@ -63,17 +76,12 @@ class LoginScreen extends Component {
                     secureTextEntry={true}
                 />
                 <Button
-                    title="Login"
-                    onPress={() => this.login()}
-                />
-
-                <Button
                     title="Sign Up"
-                    onPress={() => this.props.navigation.navigate("SignUp")}
+                    onPress={() => this.signup()}
                 />
             </View>
         );
     }
 }
 
-export default LoginScreen;
+export default SignUpScreen;

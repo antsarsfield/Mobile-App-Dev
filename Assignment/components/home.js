@@ -9,6 +9,7 @@ class HomeScreen extends Component {
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text>Home Screen</Text>
                 <Button title="About" onPress={() => nav.navigate("About")} />
+                <Button title="UserInfo" onPress={() => nav.navigate("UserInfo")} />
             </View>
         );
     }
