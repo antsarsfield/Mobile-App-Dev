@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
+import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -17,8 +17,8 @@ class SignUpScreen extends Component {
         super(props);
 
         this.state = {
-            firstname: "",
-            lastname: "",
+            first_name: "",
+            last_name: "",
             email: "",
             password: "hello123"
         };
@@ -31,8 +31,8 @@ class SignUpScreen extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                firstname: this.state.firstname,
-                lastname: this.state.lastname,
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
                 email: this.state.email,
                 password: this.state.password
             })
@@ -56,13 +56,13 @@ class SignUpScreen extends Component {
                 <TextInput
                     style={styles.formInput}
                     placeholder="First Name"
-                    onChangeText={(firstname) => this.setState({ firstname })}
-                    value={this.state.firstname}
+                    onChangeText={(first_name) => this.setState({ first_name })}
+                    value={this.state.first_name}
                 /><TextInput
                     style={styles.formInput}
                     placeholder="Last Name"
-                    onChangeText={(lastname) => this.setState({ lastname })}
-                    value={this.state.lastname}
+                    onChangeText={(last_name) => this.setState({ last_name })}
+                    value={this.state.last_name}
                 />
                 <TextInput
                     style={styles.formInput}
