@@ -49,8 +49,6 @@ class SignUpScreen extends Component {
 
     }
 
-
-
     render() {
         return (
             <View>

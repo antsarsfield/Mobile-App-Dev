@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import UserInfoScreen from './userInfo';
 
 
 const getData = async (done) => {
@@ -17,6 +18,15 @@ const storeData = async (value) => {
     try {
         const jsonValue = JSON.stringify(value)
         await AsyncStorage.setItem('@spacebook_details', jsonValue)
+    } catch (e) {
+        console.error(error);
+    }
+}
+
+const storeToken = async (value) => {
+    try {
+        const jsonValue = JSON.stringify(value)
+        await AsyncStorage.setItem('@spacebook_auth', jsonValue)
     } catch (e) {
         console.error(error);
     }
@@ -51,6 +61,7 @@ class FeedScreen extends Component {
             .then((json) => {
                 console.log(json);
                 storeData(json);
+                storeToken(this.state.login_info.token);
                 this.props.navigation.navigate("UserInfo");
             })
             .catch((error) => {
@@ -62,26 +73,14 @@ class FeedScreen extends Component {
         fetch('http://192.168.1.63:3333/api/1.0.0/logout', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'X-Authorization': this.state.login_info.token
             },
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
-            })
         })
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-                storeData(json);
-                this.props.navigation.navigate("Login");
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-
+        this.props.navigation.navigate("Login");
     }
 
     render() {
+        const token = this.state.login_info.token;
         if (this.state.isLoading) {
             return (
                 <View><Text>Loading...</Text></View>
@@ -90,14 +89,27 @@ class FeedScreen extends Component {
             console.log("here", this.state);
             return (
                 <View>
-                    <Text>Login id: {this.state.login_info.id}</Text>
-                    <Text>Login token: {this.state.login_info.token}</Text>
-                    <Button title="get profile" onPress={() => this.getUserInfo()} />
-                    <Button title="logout" onPress={() => this.logout()} />
+                    <Text style={styles.formLabel}>Login id: {this.state.login_info.id}</Text>
+                    <Text style={styles.formLabel}>Login token: {this.state.login_info.token}</Text>
+                    <Button style={styles.formTouch} title="get profile" onPress={() => this.getUserInfo()} />
+                    <Button style={styles.formTouch} title="logout" onPress={() => this.logout()} />
                 </View>
             );
         }
     }
 }
+
+const styles = StyleSheet.create({
+    formLabel: {
+        fontSize: 15,
+        color: 'steelblue'
+    },
+    formTouch: {
+        backgroundColor: 'lightblue',
+        padding: 10,
+        alignItems: 'center'
+    },
+
+})
 
 export default FeedScreen;

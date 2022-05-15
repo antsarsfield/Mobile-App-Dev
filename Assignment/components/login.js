@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
+import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -50,13 +50,15 @@ class LoginScreen extends Component {
     render() {
         return (
             <View>
-                <Text>Login</Text>
+                <Text style={styles.title}>Login</Text>
                 <TextInput
+                    style={styles.formInput}
                     placeholder="Enter email"
                     onChangeText={(email) => this.setState({ email })}
                     value={this.state.email}
                 />
                 <TextInput
+                    style={styles.formInput}
                     placeholder="Enter password"
                     onChangeText={(password) => this.setState({ password })}
                     value={this.state.password}
@@ -64,6 +66,7 @@ class LoginScreen extends Component {
                 />
                 <Button
                     title="Login"
+                    style={styles.formTouch}
                     onPress={() => this.login()}
                 />
 
@@ -75,5 +78,36 @@ class LoginScreen extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    title: {
+        color: 'steelblue',
+        backgroundColor: 'lightblue',
+        padding: 10,
+        fontSize: 25
+    },
+    formItem: {
+        padding: 20
+    },
+    formLabel: {
+        fontSize: 15,
+        color: 'steelblue'
+    },
+    formInput: {
+        borderWidth: 1,
+        borderColor: 'lightblue',
+        borderRadius: 5
+    },
+    formTouch: {
+        backgroundColor: 'lightblue',
+        padding: 10,
+        alignItems: 'center'
+    },
+    formTouchText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'steelblue'
+    }
+})
 
 export default LoginScreen;
