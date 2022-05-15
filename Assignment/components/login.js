@@ -80,19 +80,7 @@ class LoginScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    title: {
-        color: 'steelblue',
-        backgroundColor: 'lightblue',
-        padding: 10,
-        fontSize: 25
-    },
-    formItem: {
-        padding: 20
-    },
-    formLabel: {
-        fontSize: 15,
-        color: 'steelblue'
-    },
+
     formInput: {
         borderWidth: 1,
         borderColor: 'lightblue',
@@ -103,11 +91,6 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center'
     },
-    formTouchText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: 'steelblue'
-    }
 })
 
 export default LoginScreen;
