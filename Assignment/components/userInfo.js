@@ -102,7 +102,7 @@ class UserInfoScreen extends Component {
             .then((json) => {
                 console.log(json);
                 storeData(json);
-                //     this.props.navigation.navigate("UserInfo");
+                this.props.navigation.navigate("UserInfo");
             })
             .catch((error) => {
                 console.error(error);
